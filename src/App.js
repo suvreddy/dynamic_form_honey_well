@@ -1,23 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
+
+  const [formData,setFormData]=useState({});
+  const [inputData,setInputdata]=useState([]);
+
+  useEffect(()=>{
+    axios.get('http://localhost:3200/form/getForm').then(async (res)=>{
+      console.log(res.data.data)
+      await setFormData(res.data.data);
+      console.log(formData);
+      for (const type in formData) {
+        setInputdata([...inputData,type])
+      }
+
+    })
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        inputData.map(data=>{
+          <p>{data}</p>
+        })
+      }
     </div>
   );
 }

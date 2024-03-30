@@ -1,0 +1,6 @@
+{
+  "name":"text",
+  "age":"number",
+  "gender":"radio",
+  "languages":"checkbox"
+}
