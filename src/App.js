@@ -9,9 +9,8 @@ function App() {
   const [inputData,setInputdata]=useState([]);
 
   useEffect(()=>{
-    axios.get('http://localhost:3200/form/getForm').then(async (res)=>{
-      console.log(res.data.data)
-      await setFormData(res.data.data);
+    axios.get('http://localhost:3200/form/getForm').then((res)=>{
+      setFormData(res.data.data);
       console.log(formData);
       for (const type in formData) {
         setInputdata([...inputData,type])
